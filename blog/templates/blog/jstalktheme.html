@@ -1,4 +1,4 @@
-﻿<!--
+<!--
 /*
  * Created: 2015-11-03 23:15:19 GMT+9
  *  Author: 이지찬 / Jichan Lee ( jic5760@naver.com / ablog.jc-lab.net )
@@ -242,11 +242,46 @@ function jstalktheme_testfunc()
 	test_type ^= 0x01;
 	jstalktheme_addmsg(test_type, "아무개", ampm+" "+h+":"+m, otxtmsg.value.replace("\n","<br />\n"));
 }
-
 </script>
 </head>
 
 <body>
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '318722705269952',
+      xfbml      : true,
+      version    : 'v2.10'
+    });
+  
+    FB.AppEvents.logPageView();
+  
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "https://connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<form action="/login/" method="post">
+{% csrf_token %}
+{% if next %}
+<input type="hidden" name="next" value="{{ next }}" />
+{% endif %}
+</form>
+ 
+<div class="col-6">
+    <a href="{% url 'social:begin' 'facebook' %}">
+    <button class="btn btn-block btn-facebook" type="button">
+        <span>Facebook</span>
+    </button>
+    </a>
+</div>
+
 <div class="jstalktheme" id="jstalktheme_test" style="width: 320px; height: 480px;">
 
 <div class="msg">
